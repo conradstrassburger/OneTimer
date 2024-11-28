@@ -2,9 +2,14 @@ import {Component, OnInit} from '@angular/core';
 
 @Component({
   selector: 'time-display',
-  templateUrl: './time.component.html',
+  template:  `{{ time }}`,
   standalone: true,
-  styleUrl: './time.component.css',
+  styles: `
+    :host {
+      color: #d3be45;
+      font-family: "Courier New", monospace;
+      font-size: 20vw;
+    }`,
 })
 
 export class TimeComponent implements OnInit{
