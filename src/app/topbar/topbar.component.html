@@ -1,6 +1,6 @@
 <p>End-Zeitpunkt</p>
-<p><input id="dateInput" type="datetime-local" class="inputbox" [defaultValue]="date"></p>
-<button type="button" class="okbutton">OK</button>
-<button type="button" class="resetbutton">Reset</button>
+<p><input type="datetime-local" class="inputbox" [(ngModel)]="date"></p>
+<button type="button" (click)="ok()">OK</button>
+<button type="button" (click)="setDefaultTime()">Reset</button>
 <br><!-- todo remove -->
 <button type="button" id="topbarbutton" class="topbarbutton" [className]="isOpen ? 'topbarbutton open' : 'topbarbutton'" (click)="toggle()">{{open ? "⯅" : "⯆"}}</button>

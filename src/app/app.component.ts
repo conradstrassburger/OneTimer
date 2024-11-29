@@ -11,4 +11,16 @@ import {TopbarComponent} from './topbar/topbar.component';
 
 export class AppComponent {
   title = 'OneXTimer';
+  endDateTime?: Date
+  // for use in HTML
+  protected readonly Intl = Intl;
+  protected readonly navigator = navigator;
+  protected readonly Date = Date;
+
+  updateEndDateTime(endDateTime: Date | null){
+    if (endDateTime == null)
+      this.endDateTime = undefined // todo ugly?
+    else
+      this.endDateTime = endDateTime
+  }
 }

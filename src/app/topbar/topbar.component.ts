@@ -1,23 +1,23 @@
-import {Component, HostBinding} from '@angular/core';
+import {Component, EventEmitter, HostBinding, Output} from '@angular/core';
+import {FormsModule} from '@angular/forms';
 
 @Component({
   selector: 'topbar',
   templateUrl: './topbar.component.html',
   styleUrl: './topbar.component.css',
+  imports: [
+    FormsModule
+  ],
   standalone: true
 })
 
 export class TopbarComponent {
   open = false
-  date: string
+  date = "2024-11-29T16:06"
+  @Output() endDateTimeSetEvent = new EventEmitter<Date | null>
 
   constructor() {
-    const now = new Date();
-    // default 1 hour in future
-    now.setTime(now.getTime() + (60 * 60 * 1000))
-    // convert date to needed string format https://stackoverflow.com/a/61082536
-    now.setMinutes(now.getMinutes() - now.getTimezoneOffset());
-    this.date = now.toISOString().slice(0, 16);
+    this.setDefaultTime()
   }
 
   @HostBinding('class.open') get isOpen() {
@@ -26,5 +26,24 @@ export class TopbarComponent {
 
   toggle() {
     this.open = !this.open
+  }
+
+  ok() {
+    this.endDateTimeSetEvent.emit(new Date(this.date));
+  }
+
+  setDefaultTime() {
+    const now = new Date();
+    // default 1 hour in future
+    now.setTime(now.getTime() + (60 * 60 * 1000))
+    now.setMilliseconds(0)
+    this.date = this.dateToInputString(now)
+    this.endDateTimeSetEvent.emit(null);
+  }
+
+  // necessary to convert to special format expected by datetime input
+  dateToInputString(d: Date) {
+    d.setMinutes(d.getMinutes() - d.getTimezoneOffset());
+    return d.toISOString().slice(0, 16);
   }
 }

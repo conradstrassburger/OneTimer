@@ -8,16 +8,26 @@
 </style>
 
 <main class="main">
-  <topbar/>
+  <topbar (endDateTimeSetEvent)="updateEndDateTime($event)"/>
 
   <time-display/>
 
-  <div id="progressbar" class="progressbar">
-    <div id="progress" class="left"></div>
-    <div id="rest" class="right"></div>
-  </div>
-
-  <div id="end" class="end"></div>
-
-  <div id="countdown" class="countdown"></div>
+  @if (endDateTime) {
+    @if (Date.now() < endDateTime.getTime()) {
+<!--      <div class="progressbar">-->
+<!--        <div class="left"></div>-->
+<!--        <div class="right"></div>-->
+<!--      </div>-->
+      <div class="end">Ende: {{
+          Intl.DateTimeFormat(navigator.languages, {
+            hour: "2-digit",
+            minute: "2-digit",
+          }).format(endDateTime)
+        }}
+      </div>
+<!--      <div class="countdown"></div>-->
+    } @else {
+      <div class="end">Zeit abgelaufen.</div>
+    }
+  }
 </main>
