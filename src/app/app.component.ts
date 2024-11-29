@@ -1,6 +1,7 @@
-import { Component } from '@angular/core';
+import {Component} from '@angular/core';
 import {TimeComponent} from './time/time.component';
 import {TopbarComponent} from './topbar/topbar.component';
+import {DateTime, Duration} from 'luxon';
 
 @Component({
   selector: 'app-root',
@@ -11,16 +12,22 @@ import {TopbarComponent} from './topbar/topbar.component';
 
 export class AppComponent {
   title = 'OneXTimer';
-  endDateTime?: Date
+  endDateTime?: DateTime
+  remainingTime?: Duration
   // for use in HTML
-  protected readonly Intl = Intl;
-  protected readonly navigator = navigator;
-  protected readonly Date = Date;
+  protected readonly DateTime = DateTime;
 
-  updateEndDateTime(endDateTime: Date | null){
-    if (endDateTime == null)
-      this.endDateTime = undefined // todo ugly?
-    else
-      this.endDateTime = endDateTime
+  ngOnInit() {
+    this.countDownDisplay()
+    setInterval(this.countDownDisplay.bind(this), 1000);
+  }
+
+  updateEndDateTime(endDateTime: DateTime | undefined) {
+    this.endDateTime = endDateTime
+  }
+
+  private countDownDisplay() {
+    if (this.endDateTime)
+      this.remainingTime = this.endDateTime.diffNow()
   }
 }

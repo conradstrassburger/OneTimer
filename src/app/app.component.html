@@ -13,19 +13,13 @@
   <time-display/>
 
   @if (endDateTime) {
-    @if (Date.now() < endDateTime.getTime()) {
+    @if (endDateTime > DateTime.now()) {
 <!--      <div class="progressbar">-->
 <!--        <div class="left"></div>-->
 <!--        <div class="right"></div>-->
 <!--      </div>-->
-      <div class="end">Ende: {{
-          Intl.DateTimeFormat(navigator.languages, {
-            hour: "2-digit",
-            minute: "2-digit",
-          }).format(endDateTime)
-        }}
-      </div>
-<!--      <div class="countdown"></div>-->
+      <div class="end">Ende: {{endDateTime.toLocaleString(DateTime.TIME_SIMPLE)}}</div>
+      <div class="countdown">noch {{remainingTime?.toHuman({listStyle: "long"})}}</div> <!-- TODO Milliseconds? -->
     } @else {
       <div class="end">Zeit abgelaufen.</div>
     }

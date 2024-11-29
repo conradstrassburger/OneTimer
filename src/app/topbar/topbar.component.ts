@@ -1,5 +1,6 @@
 import {Component, EventEmitter, HostBinding, Output} from '@angular/core';
 import {FormsModule} from '@angular/forms';
+import {DateTime} from 'luxon';
 
 @Component({
   selector: 'topbar',
@@ -14,7 +15,7 @@ import {FormsModule} from '@angular/forms';
 export class TopbarComponent {
   open = false
   date = "2024-11-29T16:06"
-  @Output() endDateTimeSetEvent = new EventEmitter<Date | null>
+  @Output() endDateTimeSetEvent = new EventEmitter<DateTime | undefined>
 
   constructor() {
     this.setDefaultTime()
@@ -29,7 +30,7 @@ export class TopbarComponent {
   }
 
   ok() {
-    this.endDateTimeSetEvent.emit(new Date(this.date));
+    this.endDateTimeSetEvent.emit(DateTime.fromJSDate(new Date(this.date)));
   }
 
   setDefaultTime() {
@@ -38,7 +39,7 @@ export class TopbarComponent {
     now.setTime(now.getTime() + (60 * 60 * 1000))
     now.setMilliseconds(0)
     this.date = this.dateToInputString(now)
-    this.endDateTimeSetEvent.emit(null);
+    this.endDateTimeSetEvent.emit(undefined)
   }
 
   // necessary to convert to special format expected by datetime input

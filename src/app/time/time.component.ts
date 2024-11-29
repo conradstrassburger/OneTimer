@@ -1,8 +1,9 @@
 import {Component, OnInit} from '@angular/core';
+import {DateTime} from 'luxon';
 
 @Component({
   selector: 'time-display',
-  template:  `{{ time }}`,
+  template: `{{ time.toLocaleString(DateTime.TIME_24_WITH_SECONDS) }}`,
   standalone: true,
   styles: `
     :host {
@@ -12,8 +13,9 @@ import {Component, OnInit} from '@angular/core';
     }`,
 })
 
-export class TimeComponent implements OnInit{
-  time = "00:00:00";
+export class TimeComponent implements OnInit {
+  time = DateTime.now()
+  protected readonly DateTime = DateTime;
 
   ngOnInit() {
     this.timeDisplay()
@@ -21,13 +23,6 @@ export class TimeComponent implements OnInit{
   }
 
   timeDisplay() {
-    // we want leading zeroes
-    const options: Intl.DateTimeFormatOptions = {
-      hour: "2-digit",
-      minute: "2-digit",
-      second: "2-digit",
-    };
-
-    this.time = Intl.DateTimeFormat(navigator.languages, options).format(new Date());
+    this.time = DateTime.now()
   }
 }
