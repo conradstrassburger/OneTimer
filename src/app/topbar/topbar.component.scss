@@ -1,0 +1,20 @@
+//:host {
+//  background: rgba(255, 255, 255, 0.082);
+//  transition: transform 400ms;
+//  height: 20%;
+//  color: #bea513;
+//  display: block;
+//
+//  :not(.open) {
+//    transform: translateY(-100%);
+//  }
+//}
+
+.topbarbutton {
+  box-sizing: border-box;
+  padding: 5px;
+  color: #686868;
+  position: absolute;
+  font-size: 40px;
+  left: 0;
+}

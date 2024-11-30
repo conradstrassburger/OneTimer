@@ -5,7 +5,7 @@ import {DateTime} from 'luxon';
 @Component({
   selector: 'topbar',
   templateUrl: './topbar.component.html',
-  styleUrl: './topbar.component.css',
+  styleUrl: './topbar.component.scss',
   imports: [
     FormsModule
   ],
@@ -15,7 +15,8 @@ import {DateTime} from 'luxon';
 export class TopbarComponent {
   open = false
   date = "2024-11-29T16:06"
-  @Output() endDateTimeSetEvent = new EventEmitter<DateTime | undefined>
+  @Output() endDateTimeSetEvent = new EventEmitter<DateTime>
+  @Output() resetEvent = new EventEmitter<boolean>
 
   constructor() {
     this.setDefaultTime()
@@ -39,7 +40,7 @@ export class TopbarComponent {
     now.setTime(now.getTime() + (60 * 60 * 1000))
     now.setMilliseconds(0)
     this.date = this.dateToInputString(now)
-    this.endDateTimeSetEvent.emit(undefined)
+    this.resetEvent.emit(true)
   }
 
   // necessary to convert to special format expected by datetime input

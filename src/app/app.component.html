@@ -7,21 +7,22 @@
   }
 </style>
 
-<main class="main">
-  <topbar (endDateTimeSetEvent)="updateEndDateTime($event)"/>
+<topbar (endDateTimeSetEvent)="updateEndDateTime($event)" (resetEvent)="reset()"/>
+<main class="container-fluid justify-content-center main">
+  <div class="row mx-auto">
+    <time-display/>
+  </div>
 
-  <time-display/>
-
-  @if (endDateTime) {
-    @if (endDateTime > DateTime.now()) {
-<!--      <div class="progressbar">-->
-<!--        <div class="left"></div>-->
-<!--        <div class="right"></div>-->
-<!--      </div>-->
-      <div class="end">Ende: {{endDateTime.toLocaleString(DateTime.TIME_SIMPLE)}}</div>
-      <div class="countdown">noch {{remainingTime?.toHuman({listStyle: "long"})}}</div> <!-- TODO Milliseconds? -->
-    } @else {
-      <div class="end">Zeit abgelaufen.</div>
+  @if (state != State.Init) {
+    <div class="row progress w-75 mx-auto bg-secondary" role="progressbar" aria-valuemin="0" aria-valuemax="100">
+      <div class="progress-bar" [style.width]="progress"></div>
+    </div>
+    @if (state == State.Running) {
+      <div class="row end">Ende: {{ endDateTime.toLocaleString(DateTime.TIME_SIMPLE) }}</div>
+      <div class="row countdown">noch {{remainingTime.rescale().set({milliseconds: 0}).rescale().toHuman()}}</div>
     }
+  }
+  @if (state == State.Finished) {
+    <div class="row end">Zeit abgelaufen.</div>
   }
 </main>
