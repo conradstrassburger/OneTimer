@@ -22,8 +22,8 @@ export class TopbarComponent {
     this.setDefaultTime()
   }
 
-  @HostBinding('class.open') get isOpen() {
-    return this.open;
+  isOpen() {
+    return this.open ? "translateY(0)" : "translateY(-100%)"
   }
 
   toggle() {

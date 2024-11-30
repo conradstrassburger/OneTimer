@@ -1,11 +1,19 @@
-<nav class="navbar">
+<nav class="navbar bg-secondary" [style.transform]="isOpen()">
   <div class="container-fluid">
-    <p>End-Zeitpunkt</p>
-    <div class="row w-25 mx-auto"><input type="datetime-local" class="inputbox" [(ngModel)]="date"></div>
-    <button type="button" (click)="ok()">OK</button>
-    <button type="button" (click)="setDefaultTime()">Reset</button>
+      <div class="row w-100 justify-content-center">
+        <div class="col-4 align-content-center">
+          <label for="dateTime" class="form-label text-primary me-2">End-Zeitpunkt</label>
+          <input id="dateTime" type="datetime-local" class="form-control inputbox" [(ngModel)]="date">
+        </div>
+        <div class="col-2">
+          <div class="row-cols-2">
+            <button class="btn btn-outline-primary" type="button" (click)="ok()">OK</button>
+            <button class="btn btn-outline-primary" type="button" (click)="setDefaultTime()">Reset</button>
+          </div>
+        </div>
+      </div>
   </div>
+  <button class="btn position-absolute top-100" type="button" (click)="toggle()">
+    <span class="text-light fs-2">{{open ? "⯅" : "⯆"}}</span>
+  </button>
 </nav>
-
-<br><!-- todo remove -->
-<button type="button" id="topbarbutton" class="topbarbutton" [className]="isOpen ? 'topbarbutton open' : 'topbarbutton'" (click)="toggle()">{{open ? "⯅" : "⯆"}}</button>
