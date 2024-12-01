@@ -1,6 +1,6 @@
 # OneTimer
 
-Visit https://conradstrassburger.github.io/OneTimer/browser to check in action.
+Visit https://conradstrassburger.github.io/OneTimer to check in action.
 
 This project was generated using [Angular CLI](https://github.com/angular/angular-cli) version 19.0.2.
 
