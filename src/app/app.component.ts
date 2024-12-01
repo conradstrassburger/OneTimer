@@ -34,6 +34,7 @@ export class AppComponent {
   updateEndDateTime(endDateTime: DateTime) { // todo rename and fix type asserts
     localStorage.setItem("endDateTime", endDateTime.toISO()!)
     localStorage.setItem("neededTime", endDateTime.diffNow().toISO()!)
+    localStorage.removeItem("notified")
     this.state = State.Running
     this.endDateTime = endDateTime
     this.neededTime = endDateTime.diffNow()
@@ -43,19 +44,35 @@ export class AppComponent {
     if (this.state == State.Running) {
       this.remainingTime = this.endDateTime.diffNow()
       this.progress = (1 - this.remainingTime.toMillis() / this.neededTime.toMillis()) * 100 + "%"
-      if (this.endDateTime.diffNow() <= Duration.fromMillis(0))
+      if (this.endDateTime.diffNow() <= Duration.fromMillis(0)) {
         this.state = State.Finished
+        this.showNotification()
+      }
     }
   }
 
   reset() {
     localStorage.removeItem("endDateTime")
     localStorage.removeItem("neededTime")
+    localStorage.removeItem("notified")
     this.state = State.Init
     this.endDateTime = DateTime.fromMillis(0)
     this.neededTime = Duration.fromMillis(0)
     this.remainingTime = Duration.fromMillis(0)
     this.progress = "0"
+  }
+
+  showNotification() {
+    // only notify once
+    if(localStorage.getItem("notified"))
+      return
+    localStorage.setItem("notified", "yes")
+    const img = '/public/img.png';
+    new Notification('Timer-Status:',
+      {
+        icon: img,
+        body: "Zeit abgelaufen."
+      });
   }
 }
 

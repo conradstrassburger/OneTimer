@@ -8,7 +8,7 @@
 </style>
 
 <topbar (endDateTimeSetEvent)="updateEndDateTime($event)" (resetEvent)="reset()"/>
-<main class="container-fluid justify-content-center main">
+<main class="container-fluid align-content-center justify-content-center main">
   <div class="row mx-auto">
     <time-display/>
   </div>
@@ -23,6 +23,6 @@
     }
   }
   @if (state == State.Finished) {
-    <div class="row end">Zeit abgelaufen.</div>
+    <div class="row end justify-content-center">Zeit abgelaufen.</div>
   }
 </main>
