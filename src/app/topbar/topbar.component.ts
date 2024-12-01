@@ -17,6 +17,8 @@ export class TopbarComponent {
   date = "2024-11-29T16:06"
   @Output() endDateTimeSetEvent = new EventEmitter<DateTime>
   @Output() resetEvent = new EventEmitter<boolean>
+  // for use in HTML
+  protected readonly DateTime = DateTime
 
   constructor() {
     this.setDefaultTime()
