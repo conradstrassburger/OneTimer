@@ -11,7 +11,7 @@ import {DateTime, Duration} from 'luxon';
 })
 
 export class AppComponent {
-  title = 'OneXTimer';
+  title = 'OneTimer';
   endDateTime: DateTime = DateTime.fromMillis(0)
   neededTime: Duration = Duration.fromMillis(0)
   remainingTime = Duration.fromMillis(0)

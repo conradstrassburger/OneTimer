@@ -14,16 +14,16 @@ describe('AppComponent', () => {
     expect(app).toBeTruthy();
   });
 
-  it(`should have the 'OneXTimer' title`, () => {
+  it(`should have the 'OneTimer' title`, () => {
     const fixture = TestBed.createComponent(AppComponent);
     const app = fixture.componentInstance;
-    expect(app.title).toEqual('OneXTimer');
+    expect(app.title).toEqual('OneTimer');
   });
 
   it('should render title', () => {
     const fixture = TestBed.createComponent(AppComponent);
     fixture.detectChanges();
     const compiled = fixture.nativeElement as HTMLElement;
-    expect(compiled.querySelector('h1')?.textContent).toContain('Hello, OneXTimer');
+    expect(compiled.querySelector('h1')?.textContent).toContain('Hello, OneTimer');
   });
 });

@@ -3,7 +3,7 @@
   "version": 1,
   "newProjectRoot": "projects",
   "projects": {
-    "OneXTimer": {
+    "OneTimer": {
       "projectType": "application",
       "schematics": {},
       "root": "",
@@ -66,10 +66,10 @@
           "builder": "@angular-devkit/build-angular:dev-server",
           "configurations": {
             "production": {
-              "buildTarget": "OneXTimer:build:production"
+              "buildTarget": "OneTimer:build:production"
             },
             "development": {
-              "buildTarget": "OneXTimer:build:development"
+              "buildTarget": "OneTimer:build:development"
             }
           },
           "defaultConfiguration": "development"
