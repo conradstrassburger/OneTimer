@@ -1,5 +1,5 @@
-import {Component, OnInit} from '@angular/core';
-import {DateTime} from 'luxon';
+import { Component, OnInit } from '@angular/core';
+import { DateTime } from 'luxon';
 
 @Component({
   selector: 'time-display',
@@ -10,7 +10,9 @@ import {DateTime} from 'luxon';
       color: #d3be45;
       font-family: "Courier New", monospace;
       font-size: 20vw;
-    }`,
+      transition: color 400ms linear;
+      }
+    `,
 })
 
 export class TimeComponent implements OnInit {
