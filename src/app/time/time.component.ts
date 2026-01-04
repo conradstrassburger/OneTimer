@@ -1,9 +1,19 @@
 import { Component, OnInit } from '@angular/core';
 import { DateTime } from 'luxon';
+import { DigitComponent } from "./digit.component";
 
 @Component({
   selector: 'time-display',
-  template: `{{ time.toLocaleString(DateTime.TIME_24_WITH_SECONDS) }}`,
+  template: `
+    <digit [currentValue]="time.toFormat('HH').slice(0, 1)" />
+    <digit [currentValue]="time.toFormat('HH').slice(1)" />
+    <span>:</span>
+    <digit [currentValue]="time.toFormat('mm').slice(0, 1)" />
+    <digit [currentValue]="time.toFormat('mm').slice(1)" />
+    <span>:</span>
+    <digit [currentValue]="time.toFormat('ss').slice(0, 1)" />
+    <digit [currentValue]="time.toFormat('ss').slice(1)" />
+  `,
   standalone: true,
   styles: `
     :host {
@@ -13,6 +23,7 @@ import { DateTime } from 'luxon';
       transition: color 400ms linear;
       }
     `,
+  imports: [DigitComponent],
 })
 
 export class TimeComponent implements OnInit {
