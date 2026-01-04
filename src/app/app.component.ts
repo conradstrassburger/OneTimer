@@ -1,7 +1,7 @@
-import {Component} from '@angular/core';
-import {TimeComponent} from './time/time.component';
-import {TopbarComponent} from './topbar/topbar.component';
-import {DateTime, Duration} from 'luxon';
+import { Component } from '@angular/core';
+import { TimeComponent } from './time/time.component';
+import { TopbarComponent } from './topbar/topbar.component';
+import { DateTime, Duration } from 'luxon';
 
 @Component({
   selector: 'app-root',
@@ -64,7 +64,7 @@ export class AppComponent {
 
   showNotification() {
     // only notify once
-    if(localStorage.getItem("notified"))
+    if (localStorage.getItem("notified"))
       return
     localStorage.setItem("notified", "yes")
     const img = '/public/img.png';
